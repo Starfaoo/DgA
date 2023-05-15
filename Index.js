@@ -53,7 +53,7 @@ console.log(final)
 
 //  Exercise 3.
 // Calculate the mean and median values of the number elements from the input array.
-3)
+
 
 const inputCal = [12, 46, 32, 64];
 
@@ -81,24 +81,24 @@ console.log(calculateMedian(inputCal));
 // or
 
 
-// mean
-const inputCalc = [12, 46, 32, 64];
+// // mean
+const inputCalculate = [12, 46, 32, 64];
 
-function calculateMean(){
-    const sum =inputCalc.reduce((accum, curr) => (accum + curr))
-    const mean = sum/inputCalc.length
-    return mean
+function calculateSecondMean(){
+    const addMean =inputCalculate.reduce((accum, curr) => (accum + curr))
+    const secondMean = addMean/inputCalculate.length
+    return secondMean
 } 
-console.log(calculateMean());
+console.log(calculateSecondMean());
 
-// median
+// // median
 
-function calculateMedian(a,b){
-    const middleNum =inputCalc.reduce((accum, curr) => (accum,curr))
+function calculateSecondMedian(a,b){
+    const middleNum =inputCalculate.reduce((accum, curr) => (accum,curr))
     const addMiddle =  Math.abs(a + b)
     return addMiddle/2
 } 
-console.log(calculateMedian(46,32));
+console.log(calculateSecondMedian(46,32));
 
 
 
@@ -124,7 +124,7 @@ console.log(initials);
 
 
 //  Exercise 5.
-Find the difference in age between the oldest and youngest family members, and return their respective ages and the age difference.
+// Find the difference in age between the oldest and youngest family members, and return their respective ages and the age difference.
 
 const inputPer = [
       {
@@ -155,9 +155,9 @@ const inputPer = [
     const maxAge = Math.max(...ages);
     const ageDifference = maxAge - minAge;
     
-    const result = [minAge, maxAge, ageDifference];
+    const respectiveAgeResult = [minAge, maxAge, ageDifference];
     
-    console.log(result);
+    console.log(respectiveAgeResult);
 
 
 
@@ -340,12 +340,12 @@ const filteredCategories = Object.keys(categoryAvgPrices).filter(
 );
 
 // Step 3: Create an array of objects containing the filtered categories
-const result = filteredCategories.map((category) => ({
+const filteredArrResult = filteredCategories.map((category) => ({
   category,
   averagePrice: categoryAvgPrices[category].average,
 }));
 
-console.log(result);
+console.log(filteredArrResult);
 
 
 // Exercise 11
@@ -390,12 +390,12 @@ const filteredDepartments = Object.keys(departmentAvgSalaries).filter(
 );
 
 // Step 4: Create an array of objects containing the filtered departments
-const result = filteredDepartments.map((department) => ({
+const filteredResult = filteredDepartments.map((department) => ({
   department,
   averageSalary: departmentAvgSalaries[department].averageSalary,
 }));
 
-console.log(result);
+console.log(filteredResult);
 
 console.log(reduceFactorial(inputFactorial));
 
@@ -465,22 +465,22 @@ console.log(reduceFactorial(inputFactorial));
       { value: 1, symbol: 'I' }
     ];
     
-    let result = '';
+    let finalResult = '';
     
     for (let i = 0; i < romanNumeral.length; i++) {
       while (num >= romanNumeral[i].value) {
-        result += romanNumeral[i].symbol;
+        finalResult += romanNumeral[i].symbol;
         num -= romanNumeral[i].value;
       }
     }
   
-   return result;
+   return finalResult;
   }
   
   console.log(convertToRoman(36));
 
 
-freecodecamp 3
+// freecodecamp 3
 //caeser cipher
 
 function rot13(encodedString) {
@@ -506,7 +506,7 @@ console.log(rot13("GUR DHVPX OEBJA SBK WHZCF BIRE GUR YNML QBT."));
 
 
 
-4) freecode camp
+// 4) freecode camp
 // telephone number validator
 
 function telephoneCheck(str) {
@@ -545,7 +545,7 @@ console.log(telephoneCheck("11 555-555-5555")); // Output: false
 
 
 
-freecodecamp 5
+// freecodecamp 5
 // cash register
 
 
