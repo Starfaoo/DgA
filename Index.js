@@ -232,7 +232,7 @@ function reduceFactorial() {
     return [...Array(inputFactorial)].reduce((accum, val, initialValue) => accum * (initialValue + 1), 1);
 }
 
-console.log(reduceFactorial(inputFactorial));
+
 
 
 
@@ -295,3 +295,250 @@ const highScorers = students
   .filter(student => student.averageScore > 90);
 
 console.log(highScorers);
+
+
+
+
+//Exercise 10
+// You are given an array of objects representing a collection of products, each with a name, price, and category. Your task is to use map, 
+// filter, and reduce to calculate the average price of products in each category, and then return an array of objects containing only
+// the categories that have an average price above 50.
+
+
+const products = [
+  { name: "Product 1", price: 20, category: "Electronics" },
+  { name: "Product 2", price: 30, category: "Clothes" },
+  { name: "Product 3", price: 40, category: "Electronics" },
+  { name: "Product 4", price: 50, category: "Clothes" },
+  { name: "Product 5", price: 60, category: "Clothes" },
+  { name: "Product 6", price: 70, category: "Electronics" },
+  { name: "Product 7", price: 80, category: "Clothes" },
+  { name: "Product 8", price: 90, category: "Electronics" },
+];
+
+// Step 1: Calculate the average price of products in each category
+const categoryAvgPrices = products.reduce((accumulator, product) => {
+  if (!accumulator[product.category]) {
+    accumulator[product.category] = {
+      total: 0,
+      count: 0,
+    };
+  }
+  accumulator[product.category].total += product.price;
+  accumulator[product.category].count++;
+  return accumulator;
+}, {});
+
+Object.keys(categoryAvgPrices).forEach((category) => {
+  categoryAvgPrices[category].average =
+    categoryAvgPrices[category].total / categoryAvgPrices[category].count;
+});
+
+// Step 2: Filter out categories with average price above 50
+const filteredCategories = Object.keys(categoryAvgPrices).filter(
+  (category) => categoryAvgPrices[category].average > 50
+);
+
+// Step 3: Create an array of objects containing the filtered categories
+const result = filteredCategories.map((category) => ({
+  category,
+  averagePrice: categoryAvgPrices[category].average,
+}));
+
+console.log(result);
+
+
+// Exercise 11
+// You are given an array of objects representing a collection of employees,
+// each with a name, salary, and department. Your task is to use map, filter, 
+// and reduce to calculate the average salary for each department and then return an array of objects 
+// containing only the departments that have an average salary above 65000.
+
+const employees = [
+  { name: "John", salary: 50000, department: "IT" },
+  { name: "Jane", salary: 60000, department: "HR" },
+  { name: "Bob", salary: 55000, department: "IT" },
+  { name: "Sophie", salary: 75000, department: "HR" },
+  { name: "Mike", salary: 65000, department: "IT" },
+  { name: "Emily", salary: 80000, department: "HR" },
+  { name: "David", salary: 70000, department: "IT" },
+];
+
+// Step 1: Calculate the total salary and count of employees in each department
+const departmentAvgSalaries = employees.reduce((accumulator, employee) => {
+  if (!accumulator[employee.department]) {
+    accumulator[employee.department] = {
+      totalSalary: 0,
+      employeeCount: 0,
+    };
+  }
+  accumulator[employee.department].totalSalary += employee.salary;
+  accumulator[employee.department].employeeCount++;
+  return accumulator;
+}, {});
+
+// Step 2: Calculate the average salary for each department
+Object.keys(departmentAvgSalaries).forEach((department) => {
+  departmentAvgSalaries[department].averageSalary =
+    departmentAvgSalaries[department].totalSalary /
+    departmentAvgSalaries[department].employeeCount;
+});
+
+// Step 3: Filter out departments with average salary above 65000
+const filteredDepartments = Object.keys(departmentAvgSalaries).filter(
+  (department) => departmentAvgSalaries[department].averageSalary > 65000
+);
+
+// Step 4: Create an array of objects containing the filtered departments
+const result = filteredDepartments.map((department) => ({
+  department,
+  averageSalary: departmentAvgSalaries[department].averageSalary,
+}));
+
+console.log(result);
+
+console.log(reduceFactorial(inputFactorial));
+
+
+
+
+
+
+
+
+
+
+
+// FREE CODE CAMP
+
+// FreeCodeCamp 1
+
+  // write a function for a palindrome checker, the checker will 
+  // return true if the given string is a palindrome. Otherwise, return false.
+  //all non-alphanumeric characters (punctuation, spaces and symbols) and turn 
+  // everything into the same case (lower or upper case) will need to be removed in order to check for palindromes.
+
+  function palindrome(str) {
+    const replaceStr = str.replace(/[\W_]/g, '').toLowerCase();
+    const reversedStr = replaceStr.split('').reverse().join('');
+      if (reversedStr !== replaceStr) {
+          return false;
+      } 
+      return true
+  }
+
+  console.log(palindrome("eye"))
+
+
+
+
+// FreeCodeCamp 2
+
+// Convert the given number into a roman numeral.
+// { value: 1000, symbol: 'M' },
+//{ value: 900, symbol: 'CM' }, { value: 500, symbol: 'D' },{ value: 400, symbol: 'CD' },
+// { value: 100, symbol: 'C' },
+// { value: 90, symbol: 'XC' },
+// { value: 50, symbol: 'L' },
+// { value: 40, symbol: 'XL' },
+// { value: 10, symbol: 'X' },
+// { value: 9, symbol: 'IX' },
+// { value: 5, symbol: 'V' },
+// { value: 4, symbol: 'IV' },
+// { value: 1, symbol: 'I' }
+
+
+  function convertToRoman(num) {
+    const romanNumeral = [
+      { value: 1000, symbol: 'M' },
+      { value: 900, symbol: 'CM' },
+      { value: 500, symbol: 'D' },
+      { value: 400, symbol: 'CD' },
+      { value: 100, symbol: 'C' },
+      { value: 90, symbol: 'XC' },
+      { value: 50, symbol: 'L' },
+      { value: 40, symbol: 'XL' },
+      { value: 10, symbol: 'X' },
+      { value: 9, symbol: 'IX' },
+      { value: 5, symbol: 'V' },
+      { value: 4, symbol: 'IV' },
+      { value: 1, symbol: 'I' }
+    ];
+    
+    let result = '';
+    
+    for (let i = 0; i < romanNumeral.length; i++) {
+      while (num >= romanNumeral[i].value) {
+        result += romanNumeral[i].symbol;
+        num -= romanNumeral[i].value;
+      }
+    }
+  
+   return result;
+  }
+  
+  console.log(convertToRoman(36));
+
+
+freecodecamp 3
+//caeser cipher
+
+function rot13(encodedString) {
+  let decodedString = "";
+  for (let i = 0; i < encodedString.length; i++) {
+    const char = encodedString[i];
+    if (char.match(/[A-Z]/)) {
+      const asciiOffset = "A".charCodeAt();
+      const decodedChar = String.fromCharCode(
+        ((char.charCodeAt() - asciiOffset + 13) % 26) + asciiOffset
+      );
+      decodedString += decodedChar;
+    } else {
+      decodedString += char;
+    }
+  }
+  return decodedString;
+}
+console.log(rot13("SERR PBQR PNZC")); 
+console.log(rot13("SERR CVMMN!"));
+console.log(rot13("SERR YBIR?")); 
+console.log(rot13("GUR DHVPX OEBJA SBK WHZCF BIRE GUR YNML QBT."));
+
+
+
+4) freecode camp
+// telephone number validator
+
+function telephoneCheck(str) {
+  const regex = /^(1\s?)?(\(\d{3}\)|\d{3})[\s-]?\d{3}[\s-]?\d{4}$/;
+  return regex.test(str);
+}
+
+console.log(telephoneCheck("555-555-5555")); // Output: true
+console.log(telephoneCheck("1 555-555-5555")); // Output: true
+console.log(telephoneCheck("1 (555) 555-5555")); // Output: true
+console.log(telephoneCheck("5555555555")); // Output: true
+console.log(telephoneCheck("(555)555-5555")); // Output: true
+console.log(telephoneCheck("1(555)555-5555")); // Output: true
+console.log(telephoneCheck("555-5555")); // Output: false
+console.log(telephoneCheck("5555555")); // Output: false
+console.log(telephoneCheck("1 555)555-5555")); // Output: false
+console.log(telephoneCheck("1 555 555 5555")); // Output: true
+console.log(telephoneCheck("1 456 789 4444")); // Output: true
+console.log(telephoneCheck("123**&!!asdf#")); // Output: false
+console.log(telephoneCheck("55555555")); // Output: false
+console.log(telephoneCheck("(6054756961)")); // Output: false
+console.log(telephoneCheck("2 (757) 622-7382")); // Output: false
+console.log(telephoneCheck("0 (757) 622-7382")); // Output: false
+console.log(telephoneCheck("-1 (757) 622-7382")); // Output: false
+console.log(telephoneCheck("2 757 622-7382")); // Output: false
+console.log(telephoneCheck("10 (757) 622-7382")); // Output: false
+console.log(telephoneCheck("27576227382")); // Output: false
+console.log(telephoneCheck("(275)76227382")); // Output: false
+console.log(telephoneCheck("2(757)6227382")); // Output: false
+console.log(telephoneCheck("2(757)622-7382")); // Output: false
+console.log(telephoneCheck("555)-555-5555")); // Output: false
+console.log(telephoneCheck("(555-555-5555")); // Output: false
+console.log(telephoneCheck("(555)5(55?)-5555")); // Output: false
+console.log(telephoneCheck("55 55-55-555-5")); // Output: false
+console.log(telephoneCheck("11 555-555-5555")); // Output: false
