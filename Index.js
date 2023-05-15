@@ -38,10 +38,10 @@ console.log(sumFilteredInput())
 
 // or
 
-const input = [1, -4, 12, 0, -3, 29, -150];
+const inp = [1, -4, 12, 0, -3, 29, -150];
 
 
-const final = input.reduce ((accum, curr) => {
+const final = inp.reduce ((accum, curr) => {
    if( curr >= 0 ) {return  curr + accum}
    return accum
 }, 0)
@@ -55,7 +55,7 @@ console.log(final)
 // Calculate the mean and median values of the number elements from the input array.
 3)
 
-const input = [12, 46, 32, 64];
+const inputCal = [12, 46, 32, 64];
 
 function calculateMean(arr) {
   const sum = arr.reduce((acc, curr) => acc + curr, 0);
@@ -74,19 +74,19 @@ function calculateMedian(arr) {
   }
 }
 
-console.log(calculateMean(input));
-console.log(calculateMedian(input));
+console.log(calculateMean(inputCal));
+console.log(calculateMedian(inputCal));
 
 
 // or
 
 
 // mean
-const input = [12, 46, 32, 64];
+const inputCalc = [12, 46, 32, 64];
 
 function calculateMean(){
-    const sum =input.reduce((accum, curr) => (accum + curr))
-    const mean = sum/input.length
+    const sum =inputCalc.reduce((accum, curr) => (accum + curr))
+    const mean = sum/inputCalc.length
     return mean
 } 
 console.log(calculateMean());
@@ -94,7 +94,7 @@ console.log(calculateMean());
 // median
 
 function calculateMedian(a,b){
-    const middleNum =input.reduce((accum, curr) => (accum,curr))
+    const middleNum =inputCalc.reduce((accum, curr) => (accum,curr))
     const addMiddle =  Math.abs(a + b)
     return addMiddle/2
 } 
@@ -106,7 +106,7 @@ console.log(calculateMedian(46,32));
 // Exercise 4.
 //The given input is a string of multiple words with a single space between each of them. Abbreviate the name and return the name initials.
 
-const input = "George Raymond Richard Martin";
+const inputGet = "George Raymond Richard Martin";
 
 function getInitials(str) {
   return str
@@ -115,7 +115,7 @@ function getInitials(str) {
     .join("");
 }
 
-const initials = getInitials(input);
+const initials = getInitials(inputGet);
 console.log(initials);
 
 
@@ -126,7 +126,7 @@ console.log(initials);
 //  Exercise 5.
 Find the difference in age between the oldest and youngest family members, and return their respective ages and the age difference.
 
-const input = [
+const inputPer = [
       {
         name: "John",
         age: 13,
@@ -149,7 +149,7 @@ const input = [
       },
     ];
     
-    const ages = input.map((curr) => curr.age);
+    const ages = inputPer.map((curr) => curr.age);
     
     const minAge = Math.min(...ages);
     const maxAge = Math.max(...ages);
@@ -170,7 +170,7 @@ const input = [
 // because that would just be odd. The input is a sentence, and you should abbreviate every word that is 4 
 // letters long or longer. There won't be any punctuation in the sentence. g2d l2k e6e
 
-const input = "Every developer likes to mix kubernetes and javascript";
+const inputAbr = "Every developer likes to mix kubernetes and javascript";
 
 function abbreviateWords(sentence) {          
   const words = sentence.split(" ");
@@ -187,7 +187,7 @@ function abbreviateWords(sentence) {
   return abbreviatedSentence;
 }
 
-const abbreviatedInput = abbreviateWords(input);
+const abbreviatedInput = abbreviateWords(inputAbr);
 console.log(abbreviatedInput);
 
 
@@ -542,3 +542,73 @@ console.log(telephoneCheck("(555-555-5555")); // Output: false
 console.log(telephoneCheck("(555)5(55?)-5555")); // Output: false
 console.log(telephoneCheck("55 55-55-555-5")); // Output: false
 console.log(telephoneCheck("11 555-555-5555")); // Output: false
+
+
+
+freecodecamp 5
+// cash register
+
+
+function checkCashRegister(price, cash, cid) {
+  const currencyValues = {
+    "PENNY": 0.01,
+    "NICKEL": 0.05,
+    "DIME": 0.1,
+    "QUARTER": 0.25,
+    "ONE": 1,
+    "FIVE": 5,
+    "TEN": 10,
+    "TWENTY": 20,
+    "ONE HUNDRED": 100
+  };
+
+  let totalCID = 0;
+  for (let [currency, amount] of cid) {
+    totalCID += amount;
+  }
+
+  let changeDue = cash - price;
+
+  if (changeDue > totalCID) {
+    return { status: "INSUFFICIENT_FUNDS", change: [] };
+  }
+
+  if (changeDue === totalCID) {
+    return { status: "CLOSED", change: cid };
+  }
+
+  let change = [];
+  for (let i = cid.length - 1; i >= 0; i--) {
+    const currency = cid[i][0];
+    const value = currencyValues[currency];
+    let amount = 0;
+
+    while (changeDue >= value && cid[i][1] > 0) {
+      amount += value;
+      changeDue -= value;
+      cid[i][1] -= value;
+      changeDue = Math.round(changeDue * 100) / 100; // Fix floating-point precision issue
+    }
+
+    if (amount > 0) {
+      change.push([currency, amount]);
+    }
+  }
+
+  if (changeDue > 0) {
+    return { status: "INSUFFICIENT_FUNDS", change: [] };
+  }
+
+  return { status: "OPEN", change: change };
+}
+checkCashRegister(19.5, 20, [
+  ["PENNY", 1.01],
+  ["NICKEL", 2.05],
+  ["DIME", 3.1],
+  ["QUARTER", 4.25],
+  ["ONE", 90],
+  ["FIVE", 55],
+  ["TEN", 20],
+  ["TWENTY", 60],
+  ["ONE HUNDRED", 100]
+]);
